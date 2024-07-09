@@ -1,36 +1,114 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Next.js Boilerplate
+## BiomeJS + Million lint + TailwindCSS + Shadcn components + Husky + lint-staged + Bun.
+
+This is a Next.js boilerplate project setup with TailwindCSS, shadcn components, Husky, lint-staged, Biome linter and formatter, and Million lint for performance testing. This setup aims to provide a robust starting point for developing high-performance web applications with a focus on best practices and development efficiency.
+
+## Features
+
+- **Next.js**: The React framework for production.
+- **TailwindCSS**: A utility-first CSS framework for rapid UI development.
+- **shadcn Components**: A component library designed to integrate seamlessly with TailwindCSS.
+- **Husky**: Git hooks to automate tasks.
+- **lint-staged**: Run linters on git staged files.
+- **Biome**: Linter and formatter for JavaScript, TypeScript, JSON, HTML, and CSS.
+- **Million lint**: Performance linting to ensure high-performance React components.
+- **Bun**: The all-in-one JavaScript runtime and package manager.
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
+Make sure you have Bun installed on your local development machine:
+
+- [Bun](https://bun.sh/) (>=1.0.0)
+
+### Installation
+
+1. Clone the repository:
+
+```sh
+git clone https://github.com/fzkhan19/nextjs-tailwind-shadcn-Boilerplate.git
+cd nextjs-boilerplate
+```
+
+2. Install the dependencies:
+
+```sh
+bun install
+```
+
+### Development
+
+To start the development server, run:
+
+```sh
 bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Building for Production
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+To create an optimized production build, run:
 
-## Learn More
+```sh
+bun build
+```
 
-To learn more about Next.js, take a look at the following resources:
+Then, start the production server:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```sh
+bun start
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Linting and Formatting
 
-## Deploy on Vercel
+This project uses Biome for linting and formatting JavaScript, TypeScript, JSON, HTML, and CSS files. To run Biome, use:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```sh
+bun lint
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+To automatically fix linting and formatting issues, use:
+
+```sh
+bun format
+```
+
+### Git Hooks
+
+Husky and lint-staged are configured to run pre-commit hooks. This ensures that all staged files are linted and formatted before each commit. No additional setup is required; this runs automatically when you commit changes.
+
+### Performance Testing
+
+Million lint is configured to ensure high-performance React components. To run the performance linting, use:
+
+```sh
+bun dlx million@latest
+```
+
+## Folder Structure
+
+```plaintext
+.
+├── public          # Public assets
+├── src
+│   ├── components  # React components
+│   ├── pages       # Next.js pages
+│   ├── styles      # Global styles
+│   ├── utils       # Utility functions
+│   └── ...
+├── .husky          # Husky configuration
+├── biome.json        # Biome configuration
+├── components.json   # Components configuration
+├── package.json    # Project dependencies and scripts
+└── ...
+```
+
+## Contributing
+
+Contributions are welcome! Please open an issue or submit a pull request with any improvements or bug fixes.
+
+## License
+
+This project is licensed under the MIT License.
