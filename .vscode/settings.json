@@ -2,5 +2,18 @@
 	"editor.defaultFormatter": "biomejs.biome",
 	"files.associations": {
 		"*.css": "tailwindcss"
+	},
+	"editor.codeActionsOnSave": {
+		"quickfix.biome": "explicit",
+		"source.fixAll": "explicit",
+		"source.organizeImports": "explicit"
+	},
+	"emeraldwalk.runonsave": {
+		"commands": [
+			{
+				"match": "\\.(ts|tsx|js|jsx|html)$",
+				"cmd": "bunx @biomejs/biome lint ${file} --apply-unsafe"
+			}
+		]
 	}
 }

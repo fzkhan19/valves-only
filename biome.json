@@ -3,10 +3,22 @@
 	"organizeImports": {
 		"enabled": true
 	},
+	"files": {
+		"ignore": [
+			"node_modules/**/*",
+			".husky/**/*",
+			".next/**/*",
+			".git/**/*",
+			"bun.lockb"
+		]
+	},
 	"linter": {
 		"enabled": true,
 		"rules": {
-			"recommended": true
+			"recommended": true,
+			"nursery": {
+				"useSortedClasses": "error"
+			}
 		}
 	},
 	"formatter": {
