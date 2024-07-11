@@ -22,7 +22,9 @@ export default function RootLayout({
 			<body className={inter.className}>
 				<Providers>
 					<Navbar />
-					<main>{children}</main>
+					<main className="overflow-x-hidden overflow-y-scroll scroll-smooth">
+						{children}
+					</main>
 					<footer>
 						<Footer />
 					</footer>

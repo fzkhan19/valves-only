@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 
+import QueryProviders from "./query-client-provider";
 import { ThemeProvider } from "./theme-provider";
 
 const Providers = ({ children }: { children: ReactNode }) => {
@@ -10,7 +11,7 @@ const Providers = ({ children }: { children: ReactNode }) => {
 			attribute="class"
 			defaultTheme="system"
 		>
-			{children}
+			<QueryProviders>{children}</QueryProviders>
 		</ThemeProvider>
 	);
 };

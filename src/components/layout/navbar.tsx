@@ -17,6 +17,7 @@ import {
 } from "../ui/sheet";
 
 import { PRODUCT_TITLE } from "@/constants/content";
+import { useQuery } from "@tanstack/react-query";
 import {
 	NavigationMenu,
 	NavigationMenuItem,
@@ -29,14 +30,6 @@ import { ToggleTheme } from "./toggle-theme";
 interface RouteProps {
 	href: string;
 	label: string;
-}
-
-interface FeatureProps {
-	id: number;
-	name: string;
-	page_url: string;
-	perma_link: string;
-	categories: string[];
 }
 
 const routeList: RouteProps[] = [
@@ -58,10 +51,16 @@ const routeList: RouteProps[] = [
 	},
 ];
 
-const productList = require("@/constants/category-mock").data;
+const getProducts = async () => {
+	return await fetch("/api/get-products").then((res) => res.json());
+};
 
 export const Navbar = () => {
 	const [isOpen, setIsOpen] = React.useState(false);
+	const { data } = useQuery({
+		queryKey: ["products"],
+		queryFn: () => getProducts(),
+	});
 
 	return (
 		<header
@@ -132,7 +131,9 @@ export const Navbar = () => {
 						</Link>
 					</NavigationMenuItem>
 
-					<NestedDropdown />
+					<NavigationMenuItem>
+						<NestedDropdown products={data?.data} />
+					</NavigationMenuItem>
 
 					<NavigationMenuItem>
 						{routeList.map(({ href, label }) => (

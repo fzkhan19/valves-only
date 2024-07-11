@@ -1,3 +1,5 @@
+"use client";
+
 import { cn } from "@/lib/utils";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import Link from "next/link";
@@ -5,13 +7,10 @@ import { useState } from "react";
 import { Button } from "./button";
 import {
 	NavigationMenuContent,
-	NavigationMenuItem,
 	NavigationMenuTrigger,
 } from "./navigation-menu";
 
-const data = require("@/constants/category-mock");
-
-const DropdownItem = ({
+export const DropdownItem = ({
 	item,
 	level = 0,
 	link,
@@ -22,20 +21,23 @@ const DropdownItem = ({
 	link: string;
 }) => {
 	const [isOpen, setIsOpen] = useState(false);
-	const hasSubCategories = item.categories?.length > 0;
+	const hasSubCategories =
+		item.second_categories?.length > 0 ||
+		item.third_categories?.length > 0 ||
+		item.fourth_categories?.length > 0;
 
 	return (
 		<li>
 			<div className="flex items-center gap-2">
 				<Link
-					href={link}
+					href={`/product-category/${link}`}
 					className={cn(
 						"flex w-full items-center justify-between rounded p-2 text-base",
-						"hover:bg-secondary ",
+						"hover:bg-secondary",
 						isOpen && "bg-white underline decoration-primary/50",
 					)}
 				>
-					<span>{item.name}</span>
+					{item.name}
 				</Link>
 				<Button
 					onClick={() => setIsOpen(!isOpen)}
@@ -49,12 +51,30 @@ const DropdownItem = ({
 			{isOpen && hasSubCategories && (
 				<ul className={"pl-6"}>
 					{/* biome-ignore lint/suspicious/noExplicitAny: <explanation> */}
-					{item.categories?.map((subItem: any) => (
+					{item.second_categories?.map((subItem: any) => (
 						<DropdownItem
 							key={subItem.id}
 							item={subItem}
 							level={level + 1}
-							link={subItem.page_url}
+							link={subItem.perma_link}
+						/>
+					))}
+					{/* biome-ignore lint/suspicious/noExplicitAny: <explanation> */}
+					{item.third_categories?.map((subItem: any) => (
+						<DropdownItem
+							key={subItem.id}
+							item={subItem}
+							level={level + 1}
+							link={subItem.perma_link}
+						/>
+					))}
+					{/* biome-ignore lint/suspicious/noExplicitAny: <explanation> */}
+					{item.fourth_categories?.map((subItem: any) => (
+						<DropdownItem
+							key={subItem.id}
+							item={subItem}
+							level={level + 1}
+							link={subItem.perma_link}
 						/>
 					))}
 				</ul>
@@ -63,9 +83,21 @@ const DropdownItem = ({
 	);
 };
 
-export const NestedDropdown = () => {
+interface FeatureProps {
+	id: number;
+	name: string;
+	page_url: string;
+	perma_link: string;
+	categories: string[];
+}
+
+export const NestedDropdown = ({
+	products = [],
+}: {
+	products: FeatureProps[] | undefined;
+}) => {
 	return (
-		<NavigationMenuItem>
+		<>
 			<NavigationMenuTrigger
 				className={cn(
 					"h-fit bg-transparent p-0 font-semibold text-xs opacity-70",
@@ -77,18 +109,17 @@ export const NestedDropdown = () => {
 			<NavigationMenuContent>
 				<div className="grid h-[600px] w-[600px] grid-cols-1 gap-5 overflow-y-scroll p-4">
 					<ul className="flex flex-col gap-2">
-						{/* biome-ignore lint/suspicious/noExplicitAny: <explanation> */}
-						{data.data.map((product: any) => (
+						{products?.map((product: FeatureProps) => (
 							<DropdownItem
 								key={product.id}
 								item={product}
-								link={product.page_url}
+								link={product.perma_link}
 							/>
 						))}
 					</ul>
 				</div>
 			</NavigationMenuContent>
-		</NavigationMenuItem>
+		</>
 	);
 };
 
