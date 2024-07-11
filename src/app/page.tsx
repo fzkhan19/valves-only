@@ -1,3 +1,3 @@
 export default function Home() {
-	return <article>Hello world</article>;
+	return <article>Try opening our product ranges from the navbar</article>;
 }

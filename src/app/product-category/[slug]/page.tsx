@@ -25,8 +25,6 @@ export default async function Page({ params }: { params: { slug: string } }) {
 	const data = (await response.json()).data;
 	const queryClient = new QueryClient();
 
-	console.log("DATA::::", data);
-
 	await queryClient.prefetchQuery({
 		queryKey: ["posts"],
 		queryFn: getProducts,
