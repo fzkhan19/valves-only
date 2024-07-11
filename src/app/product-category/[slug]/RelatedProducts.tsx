@@ -2,13 +2,14 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-import { cn } from "@/lib/utils";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { InquiryForm } from "../../../components/InquiryForm";
 
-export default function RelatedProducts({ products }: { products: Product[] }) {
+// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+export default function RelatedProducts({ products }: { products: any[] }) {
 	const [page, setPage] = useState(1);
 	const productsPerPage = 6;
 
@@ -48,7 +49,8 @@ export default function RelatedProducts({ products }: { products: Product[] }) {
 				</div>
 			</div>
 			<div className="grid grid-cols-3 gap-4">
-				{currentProducts.map((product: Product) => (
+				{/* biome-ignore lint/suspicious/noExplicitAny: <explanation> */}
+				{currentProducts.map((product: any) => (
 					<Card key={product.id} className="group">
 						<CardContent className="flex h-full flex-col items-center gap-2 px-0 pb-0">
 							<Link
@@ -72,26 +74,11 @@ export default function RelatedProducts({ products }: { products: Product[] }) {
 									</Label>
 								</div>
 							</Link>
-							<Button
-								className={cn(
-									"w-full cursor-none opacity-0 transition-all duration-600 ease-in-out",
-									"group-hover:cursor-pointer group-hover:opacity-100",
-								)}
-							>
-								Custom Enquiry
-							</Button>
+							<InquiryForm />
 						</CardContent>
 					</Card>
 				))}
 			</div>
 		</div>
 	);
-}
-
-interface Product {
-	id: string | number;
-	name: string;
-	image: string;
-	price: string;
-	perma_link: string;
 }
