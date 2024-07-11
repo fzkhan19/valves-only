@@ -25,7 +25,6 @@ export async function GET(request: Request) {
 				// @ts-expect-error Header type
 				headers: HEADERS_LIST,
 				cache: "force-cache",
-				next: { revalidate: 3600 },
 			},
 		);
 
