@@ -20,7 +20,7 @@ const getProducts = async () => {
 
 export default async function Page({ params }: { params: { slug: string } }) {
 	const response = await fetch(
-		`http://localhost:3000/api/get-product?product=${params.slug}`,
+		`${process.env.PAGE_URL}/api/get-product?product=${params.slug}`,
 	);
 	const data = (await response.json()).data;
 	const queryClient = new QueryClient();
